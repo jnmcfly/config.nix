@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  system.stateVersion = "24.11";
 
   time.timeZone = "Europe/Berlin";
 
@@ -15,7 +16,6 @@
   };
 
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   boot.loader.grub.devices = [ "/dev/sda" ];
   boot.loader.efi.efiSysMountPoint = "/boot";
 
