@@ -14,6 +14,11 @@
     fsType = "vfat";
   };
 
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.devices = [ "/dev/sda" ];
+  boot.loader.efi.efiSysMountPoint = "/boot";
+
   users.users.jn = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
