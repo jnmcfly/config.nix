@@ -3,6 +3,10 @@
 {
   system.stateVersion = "24.11";
 
+  imports = [
+    <nixpkgs/nixos/modules/programs/home-manager.nix>
+  ];
+
   time.timeZone = "Europe/Berlin";
   console.keyMap = "de";
   services.xserver.xkb = {
@@ -74,5 +78,10 @@
   services.displayManager.sddm.enable = true;
   services.displayManager.defaultSession = "hyprland";
   services.xserver = { enable = true; };
-
+  home-manager = {
+    users.jn = {
+      home.stateVersion = "24.11";
+      programs.git.enable = true;
+    };
+  };
 }
