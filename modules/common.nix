@@ -62,19 +62,17 @@
     zsh
   ];
 
-  programs.zsh.enable = true;
-
-  programs.hyprland.enable = true;
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   nixpkgs.config.allowUnfree = true;
 
-  services.openssh.enable = true;
+  programs.zsh.enable = true;
+  programs.hyprland.enable = true;
+  programs.home-manager.enable = true;
 
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  services.openssh.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.defaultSession = "hyprland";
-programs.home-manager.enable = true;
-  services.xserver = {
-    enable = true;
-  };
+  services.xserver = { enable = true; };
 
 }
