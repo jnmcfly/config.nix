@@ -6,18 +6,18 @@
   time.timeZone = "Europe/Berlin";
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
+    device = "/dev/disk/by-label/os";
+    fsType = "btrfs";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/BOOT";
+    device = "/dev/disk/by-label/boot";
     fsType = "vfat";
   };
 
   boot.loader.grub.enable = true;
   boot.loader.grub.devices = [ "/dev/sda" ];
-  boot.loader.efi.efiSysMountPoint = "/boot";
+  boot.loader.grub.useBIOSBootPartition = true;
 
   users.users.jn = {
     isNormalUser = true;
