@@ -11,13 +11,13 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
+    device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
   };
 
   boot.loader.grub.enable = true;
   boot.loader.grub.devices = [ "/dev/sda" ];
-  boot.loader.grub.useBIOSBootPartition = true;
+  boot.loader.efi.efiSysMountPoint = "/boot";
 
   users.users.jn = {
     isNormalUser = true;
