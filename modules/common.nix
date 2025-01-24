@@ -75,7 +75,6 @@
 
   services.xserver = {
     enable = true;
-    windowManager.hyprland.enable = true;
   };
 
 }
