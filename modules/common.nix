@@ -70,4 +70,13 @@
 
   services.openssh.enable = true;
 
+  services.displayManager.sddm.enable = true;
+  services.displayManager.defaultSession = "hyprland";
+
+  services.xserver = {
+    enable = true;
+    displayManager.enable = true;
+    windowManager.hyprland.enable = true;
+  };
+
 }
