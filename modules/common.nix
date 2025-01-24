@@ -72,7 +72,7 @@
 
   services.displayManager.sddm.enable = true;
   services.displayManager.defaultSession = "hyprland";
-
+programs.home-manager.enable = true;
   services.xserver = {
     enable = true;
   };
