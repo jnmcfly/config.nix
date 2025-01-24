@@ -4,6 +4,11 @@
   system.stateVersion = "24.11";
 
   time.timeZone = "Europe/Berlin";
+  console.keyMap = "de";
+  services.xserver = {
+    layout = "de";
+    xkbVariant = "";
+  };
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/os";
