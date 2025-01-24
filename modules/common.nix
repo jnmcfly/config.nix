@@ -20,7 +20,6 @@
   boot.loader.grub.devices = [ "/dev/sda" ];
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.enable = true;
-  boot.loader.systemd-boot.enable = true;
 
   users.users.jn = {
     isNormalUser = true;
