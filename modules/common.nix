@@ -4,6 +4,16 @@
 
   time.timeZone = "Europe/Berlin";
 
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/BOOT";
+    fsType = "vfat";
+  };
+
   users.users.jn = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
