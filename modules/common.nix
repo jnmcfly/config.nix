@@ -65,7 +65,6 @@
   programs.zsh.enable = true;
 
   programs.hyprland.enable = true;
-  programs.kitty.enable = true; # required for the default Hyprland config
   wayland.windowManager.hyprland.enable = true; # enable Hyprland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   nixpkgs.config.allowUnfree = true;
