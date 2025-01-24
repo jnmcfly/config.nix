@@ -39,6 +39,7 @@
     docker-compose
     dunst
     easyeffects
+    git
     git-extras
     hyprland
     hyprland-protocols
@@ -63,6 +64,8 @@
 
   programs.zsh.enable = true;
 
+  programs.hyprland.enable = true;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   nixpkgs.config.allowUnfree = true;
 
   services.openssh.enable = true;
