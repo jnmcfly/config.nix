@@ -7,16 +7,24 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/laptop.nix ./modules/common.nix ];
+        modules = [
+          ./hosts/laptop.nix
+          ./modules/common.nix
+          home-manager.nixosModules.home-manager
+        ];
       };
 
       desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/desktop.nix ./modules/common.nix ];
+        modules = [
+          ./hosts/desktop.nix
+          ./modules/common.nix
+          home-manager.nixosModules.home-manager
+        ];
       };
     };
 
