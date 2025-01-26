@@ -44,6 +44,7 @@
       };
       home.stateVersion = "24.11";
   };
+  home-manager.backupFileExtension = "backup";
 
   environment.systemPackages = with pkgs; [
     _1password-gui
