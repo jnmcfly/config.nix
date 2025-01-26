@@ -42,7 +42,7 @@
 
     packages = {
       x86_64-linux = {
-        nixos-rebuild = nixosConfigurations.laptop.config.system.build.nixos-rebuild;
+        nixos-rebuild = self.nixosConfigurations.laptop.config.system.build.nixos-rebuild;
       };
     };
   };
