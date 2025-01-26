@@ -42,7 +42,8 @@
 
     packages = {
       x86_64-linux = {
-        nixos-rebuild = self.nixosConfigurations.laptop.config.system.build.nixos-rebuild;
+        laptop = self.nixosConfigurations.laptop.config.system.build.toplevel;
+        desktop = self.nixosConfigurations.desktop.config.system.build.toplevel;
       };
     };
   };
