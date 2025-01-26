@@ -39,5 +39,12 @@
         modules = [ ./home/desktop-home.nix ];
       };
     };
+
+    packages = {
+      x86_64-linux = {
+        inherit (nixosConfigurations.laptop.config.system.build) nixos-rebuild;
+        inherit (nixosConfigurations.desktop.config.system.build) nixos-rebuild;
+      };
+    };
   };
 }
