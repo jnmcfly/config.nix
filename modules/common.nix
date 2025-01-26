@@ -29,6 +29,19 @@
     shell = pkgs.zsh;
   };
 
+  home-manager.users.jn = {pkgs, ...}: {
+    home.packages = with pkgs; [
+      alacritty
+      bat
+      fd
+      fzf
+      git ];
+      programs.zsh = {
+        enable = true;
+      };
+      home.stateVersion = "24.11";
+  };
+
   environment.systemPackages = with pkgs; [
     _1password-gui
     calibre
