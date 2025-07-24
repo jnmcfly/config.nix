@@ -8,19 +8,26 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-# Aktiviert proprietären NVIDIA-Treiber
+  networking.hostName = "hyprnix";
+  networking.networkmanager.enable = true;
+
+  time.timeZone = "Europe/Berlin";
+  i18n.defaultLocale = "de_DE.UTF-8";
+  console.keyMap = "de";
+
+  # NVIDIA (proprietär)
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
-    open = false; # false = proprietary, true = open kernel mod (wenn supported)
+    open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  # NVIDIA + Wayland Compatibility
   environment.variables = {
-    # Für Wayland mit NVIDIA
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -29,23 +36,24 @@
     XDG_SESSION_TYPE = "wayland";
   };
 
-  # Wichtig für Wayland auf NVIDIA
   boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 
-  networking.hostName = "hyprnix";
-  networking.networkmanager.enable = true;
-
-  time.timeZone = "Europe/Berlin";
-  i18n.defaultLocale = "de_DE.UTF-8";
-  console.keyMap = "de";
-
+  # Hyprland (Wayland-Session)
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm = {
+    enable = true;
+    autoLogin.enable = true;       # optional
+    autoLogin.user = "jn";         # setze auf deinen Benutzernamen
+    autoLogin.session = "hyprland";
+  };
   services.xserver.desktopManager.plasma5.enable = false;
-  programs.zsh.enable = true;
 
   programs.hyprland.enable = true;
 
+  # Shell & Terminal
+  programs.zsh.enable = true;
+
+  # Audio
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -56,14 +64,17 @@
     pulse.enable = true;
     jack.enable = true;
   };
+
+  # SSH
   services.openssh = {
     enable = true;
     settings = {
-      PermitRootLogin = "no";        # sicherer: kein Root-Login
-      PasswordAuthentication = true; # optional (du kannst auch nur SSH-Key erlauben)
+      PermitRootLogin = "no";
+      PasswordAuthentication = true; # oder false, falls du nur Keys willst
     };
   };
 
+  # Bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
