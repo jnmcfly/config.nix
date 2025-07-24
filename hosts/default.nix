@@ -44,7 +44,6 @@
     enable = true;
     autoLogin.enable = true;       # optional
     autoLogin.user = "jn";         # setze auf deinen Benutzernamen
-    autoLogin.session = "hyprland";
   };
   services.xserver.desktopManager.plasma5.enable = false;
 
