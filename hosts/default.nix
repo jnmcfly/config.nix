@@ -42,8 +42,6 @@
   services.xserver.enable = true;
   services.xserver.displayManager.sddm = {
     enable = true;
-    autoLogin.enable = true;       # optional
-    autoLogin.user = "jn";         # setze auf deinen Benutzernamen
   };
   services.xserver.desktopManager.plasma5.enable = false;
 

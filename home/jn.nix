@@ -8,9 +8,12 @@
   programs.home-manager.enable = true;
 
   programs.zsh.enable = true;
-  programs.starship.enable = true;
-
-  programs.alacritty.enable = true;
+ 
+  programs.git = {
+    enable = true;
+    userName = "jnmcfly";
+    userEmail = "jan.bechtel@protonmail.com";
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -23,6 +26,10 @@
         "dunst &"
         "hyprpaper &"
       ];
+      bind = [
+        "SUPER, RETURN, exec, kitty"
+        "SUPER, SPACE, exec, rofi -show drun"
+];
       input.kb_layout = "de";
     };
   };
@@ -30,6 +37,9 @@
   home.packages = with pkgs; [
     firefox
     kitty
+    vscode
+    oh-my-zsh
+    pcmanfm
     rofi-wayland
     grim
     slurp
