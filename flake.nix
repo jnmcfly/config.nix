@@ -1,5 +1,5 @@
 {
-  description = "NixOS + Hyprland + Home Manager";
+  description = "NixOS + Hyprland + Home Manager + NVIDIA";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
@@ -26,12 +26,21 @@
       }) // {
         nixosConfigurations.default = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+
           specialArgs = {
             inherit inputs;
             inherit (inputs) hyprland;
           };
+
           modules = [
+            # Aktiviert unfreie Pakete im Systemkontext
+            ({ config, pkgs, ... }: {
+              nixpkgs.config.allowUnfree = true;
+            })
+
             ./hosts/default.nix
+
+            # Home Manager Einbindung
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
