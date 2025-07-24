@@ -40,7 +40,7 @@
 
   # Hyprland (Wayland-Session)
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm = {
+  services.displayManager.sddm = {
     enable = true;
   };
   services.xserver.desktopManager.plasma5.enable = false;
@@ -51,8 +51,7 @@
   programs.zsh.enable = true;
 
   # Audio
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
