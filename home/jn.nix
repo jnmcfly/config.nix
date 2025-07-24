@@ -50,6 +50,5 @@
   ];
 
   services.dunst.enable = true;
-  services.hyprpaper.enable = true;
   programs.waybar.enable = true;
 }
