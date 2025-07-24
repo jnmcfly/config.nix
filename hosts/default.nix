@@ -74,5 +74,5 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "25.05";
 }
