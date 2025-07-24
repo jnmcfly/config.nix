@@ -1,43 +1,44 @@
 {
-  description = "jn.nix";
+  description = "NixOS + Hyprland + Home Manager";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations = {
-      laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/laptop.nix
-          ./modules/common.nix
-          home-manager.nixosModules.home-manager
-        ];
+  outputs = inputs @ { nixpkgs, home-manager, hyprland, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = [
+            hyprland.overlays.default
+          ];
+        };
+      in {
+        formatter = pkgs.nixpkgs-fmt;
+      }) // {
+        nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            inherit (inputs) hyprland;
+          };
+          modules = [
+            ./hosts/default.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.jn = import ./home/jn.nix;
+            }
+          ];
+        };
       };
-
-      desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/desktop.nix
-          ./modules/common.nix
-          home-manager.nixosModules.home-manager
-        ];
-      };
-    };
-
-    homeConfigurations = {
-      "jn@laptop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [ ./home/laptop-home.nix ];
-      };
-
-      "jn@desktop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [ ./home/desktop-home.nix ];
-      };
-    };
-  };
 }
